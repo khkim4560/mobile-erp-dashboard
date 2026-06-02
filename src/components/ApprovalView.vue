@@ -22,6 +22,8 @@ const statusFilter = ref<string>('all');
 const requests = ref<ApprovalRequest[]>([]);
 const selectedIds = ref<string[]>([]);
 
+const showAlert = (msg: string) => window.alert(msg);
+
 onMounted(async () => {
   try {
     const res = await axios.get('/api/approvals');
@@ -44,14 +46,14 @@ const handleDecision = async (id: string, decision: 'approved' | 'rejected') => 
   const item = requests.value.find(r => r.id === id);
   if (!item) return;
 
-  const newStatus = decision === 'approved' ? '승인완료' : '반려됨';
+  const newStatus = (decision === 'approved' ? '승인완료' : '반려됨') as ApprovalRequest['status'];
   try {
     const updatedItem = { ...item, status: newStatus };
     await axios.put(`/api/approvals/${id}`, updatedItem);
     requests.value = requests.value.map(r => r.id === id ? updatedItem : r);
   } catch (error) {
     console.error('Failed to update approval:', error);
-    alert('상태 변경에 실패했습니다.');
+    window.alert('상태 변경에 실패했습니다.');
   }
 };
 
@@ -69,7 +71,7 @@ const handleBatchApprove = async () => {
   );
 
   if (pendingsToApprove.length === 0) {
-    alert('결재대기 상태의 대상 문서가 없습니다.');
+    window.alert('결재대기 상태의 대상 문서가 없습니다.');
     return;
   }
 
@@ -86,13 +88,13 @@ const handleBatchApprove = async () => {
       
       const idsToApprove = pendingsToApprove.map(r => r.id);
       requests.value = requests.value.map(item => 
-        idsToApprove.includes(item.id) ? { ...item, status: '승인완료' } : item
+        idsToApprove.includes(item.id) ? { ...item, status: '승인완료' as const } : item
       );
       selectedIds.value = [];
-      alert('일괄 결재 승인이 완료되었습니다.');
+      window.alert('일괄 결재 승인이 완료되었습니다.');
     } catch (error) {
       console.error('Failed batch approval:', error);
-      alert('일괄 승인 중 오류가 발생했습니다.');
+      window.alert('일괄 승인 중 오류가 발생했습니다.');
     }
   }
 };
@@ -118,7 +120,7 @@ const handleBatchApprove = async () => {
             {{ p === 'today' ? '오늘' : p === 'week' ? '1주일' : '1개월' }}
           </button>
           <button 
-            @click="activePeriod = 'calendar'; alert('연도별/월간 세부 카테고리는 캘린더 모듈에서 기안됩니다.')"
+            @click="activePeriod = 'calendar'; showAlert('연도별/월간 세부 카테고리는 캘린더 모듈에서 기안됩니다.')"
             class="flex items-center gap-1 px-4 py-2 shrink-0 rounded-full font-semibold text-xs tracking-tight transition-all duration-150"
             :class="activePeriod === 'calendar' ? 'bg-blue-600 dark:bg-[#a7c8ff] text-white dark:text-[#001e40] shadow-sm' : 'bg-gray-100 dark:bg-[#1c2b3c] text-gray-500 dark:text-[#c3c6d1]'"
           >

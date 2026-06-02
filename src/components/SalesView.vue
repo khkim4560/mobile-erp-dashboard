@@ -17,6 +17,8 @@ const selectedBrand = ref('전체 브랜드');
 const selectedChannel = ref('유통형태');
 const storeSales = ref<StoreSales[]>([]);
 
+const showAlert = (msg: string) => window.alert(msg);
+
 onMounted(async () => {
   try {
     const res = await axios.get('/api/stores');
@@ -69,7 +71,7 @@ const trendIsPositive = computed(() => !trendRate.value.includes('감소'));
         </button>
         
         <button 
-          @click="selectedPeriod = 'custom'; alert('캘린더 기간선택 기능은 모바일 기기 기본 날짜조율기를 연동합니다.')"
+          @click="selectedPeriod = 'custom'; showAlert('캘린더 기간선택 기능은 모바일 기기 기본 날짜조율기를 연동합니다.')"
           class="flex items-center gap-1.5 px-4 py-2 shrink-0 rounded-full font-sans font-semibold text-xs transition-colors duration-150"
           :class="selectedPeriod === 'custom'
             ? 'bg-blue-600 dark:bg-[#a7c8ff] text-white dark:text-[#001e40] shadow-sm'

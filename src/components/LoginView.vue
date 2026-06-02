@@ -27,6 +27,8 @@ const rememberId = ref(true);
 const isLoading = ref(false);
 const errorMsg = ref('');
 
+const showAlert = (msg: string) => window.alert(msg);
+
 const handleSubmit = () => {
   if (!employeeId.value.trim()) {
     errorMsg.value = '사원번호를 입력하세요.';
@@ -159,7 +161,7 @@ const handleSubmit = () => {
           </label>
           <a 
             href="#forgot-pass"
-            @click.prevent="alert('비밀번호 변경/찾기를 위해 시스템 관리자(IT팀 내선 2309)에 문의해 주세요.')"
+            @click.prevent="showAlert('비밀번호 변경/찾기를 위해 시스템 관리자(IT팀 내선 2309)에 문의해 주세요.')"
             class="font-semibold text-[12px] leading-[16px] text-blue-600 dark:text-[#a7c8ff] hover:underline"
           >
             비밀번호 찾기
