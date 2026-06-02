@@ -1,0 +1,114 @@
+import { 
+  BrandPerformance, 
+  StoreSales, 
+  InventoryItem, 
+  ApprovalRequest 
+} from './types';
+
+// 당일 실적 (Daily Performance)
+export const initialDailyPerformance: BrandPerformance[] = [
+  { brand: '브랜드 A', target: 12000, actual: 11520, rate: 96 },
+  { brand: '브랜드 B', target: 8500, actual: 6970, rate: 82 },
+  { brand: '브랜드 C', target: 5000, actual: 3250, rate: 65 },
+];
+
+export const initialDailyPerformanceBrandMetrics: Record<string, BrandPerformance[]> = {
+  '전체 브랜드': [
+    { brand: '브랜드 A', target: 12000, actual: 11520, rate: 96 },
+    { brand: '브랜드 B', target: 8500, actual: 6970, rate: 82 },
+    { brand: '브랜드 C', target: 5000, actual: 3250, rate: 65 },
+  ],
+  '브랜드 A': [
+    { brand: '강남본점 A', target: 4000, actual: 3950, rate: 98.7 },
+    { brand: '명동점 A', target: 4500, actual: 4420, rate: 98.2 },
+    { brand: '여의도점 A', target: 3500, actual: 3150, rate: 90.0 },
+  ],
+  '브랜드 B': [
+    { brand: '강남본점 B', target: 3000, actual: 2600, rate: 86.6 },
+    { brand: '명동점 B', target: 3500, actual: 2870, rate: 82.0 },
+    { brand: '여의도점 B', target: 2000, actual: 1500, rate: 75.0 },
+  ],
+  '브랜드 C': [
+    { brand: '강남본점 C', target: 1500, actual: 1100, rate: 73.3 },
+    { brand: '명동점 C', target: 2000, actual: 1350, rate: 67.5 },
+    { brand: '여의도점 C', target: 1500, actual: 800, rate: 53.3 },
+  ],
+};
+
+// 월 누계 실적 (Monthly Cumulative Performance)
+export const initialMonthlyPerformance: BrandPerformance[] = [
+  { brand: '브랜드 A', target: 360000, actual: 331200, rate: 92 },
+  { brand: '브랜드 B', target: 255000, actual: 191250, rate: 75 },
+  { brand: '브랜드 C', target: 150000, actual: 102000, rate: 68 },
+];
+
+// 매장별 매출 정보 (Sales Inquiry)
+export const initialStoreSales: StoreSales[] = [
+  { id: '1', storeName: '강남 플래그십 스토어', actualSales: 452000000, completedRate: 105, stretchGoal: 430000000, brand: '브랜드 A', channel: '직영점' },
+  { id: '2', storeName: '명동 롯데백화점점', actualSales: 315500000, completedRate: 98, stretchGoal: 320000000, brand: '브랜드 B', channel: '백화점' },
+  { id: '3', storeName: '여의도 더현대점', actualSales: 280000000, completedRate: 87, stretchGoal: 320000000, brand: '브랜드 C', channel: '백화점' },
+  { id: '4', storeName: '부산 신세계 센텀점', actualSales: 398000000, completedRate: 102, stretchGoal: 390000000, brand: '브랜드 A', channel: '백화점' },
+  { id: '5', storeName: '대구 동성로 아울렛점', actualSales: 220000000, completedRate: 110, stretchGoal: 200000000, brand: '브랜드 B', channel: '아울렛' },
+  { id: '6', storeName: '가산 현대아울렛 스토어', actualSales: 185000000, completedRate: 95, stretchGoal: 195000000, brand: '브랜드 C', channel: '아울렛' },
+  { id: '7', storeName: '판교 현대백화점점', actualSales: 342000000, completedRate: 101, stretchGoal: 338000000, brand: '브랜드 A', channel: '백화점' },
+  { id: '8', storeName: '수원 스타필드 직영샵', actualSales: 292700000, completedRate: 103, stretchGoal: 284000000, brand: '브랜드 B', channel: '직영점' },
+];
+
+// 재고 정보 (Inventory Inquiry)
+export const initialInventoryItems: InventoryItem[] = [
+  { id: 'i1', code: 'TS-2024-BLACK-M', productName: '베이직 코튼 라운드 티셔츠 (Black)', location: '강남본점', currentStock: 42, availableStock: 38, status: '시즌 신상품', category: '상의', brand: '브랜드 A' },
+  { id: 'i2', code: 'PT-2024-DENIM-L', productName: '슬림핏 스트레치 데님 팬츠 (Indigo)', location: '강남본점', currentStock: 3, availableStock: 1, status: '재고부족', category: '하의', brand: '브랜드 B' },
+  { id: 'i3', code: 'JK-2024-WOOL-XL', productName: '메리노 울 블렌드 싱글 자켓 (Charcoal)', location: '강남본점', currentStock: 15, availableStock: 12, status: '예약 가능', category: '아우터', brand: '브랜드 A' },
+  { id: 'i4', code: 'HD-2024-GRAY-S', productName: '세미오버 크루넥 레더 그레이 후디', location: '강남본점', currentStock: 25, availableStock: 24, status: '예약 가능', category: '상의', brand: '브랜드 C' },
+  { id: 'i5', code: 'OP-2024-BEIGE-M', productName: '여성 벨티드 코듀로이 셔츠 원피스', location: '강남본점', currentStock: 0, availableStock: 0, status: '재고부족', category: '원피스', brand: '브랜드 A' },
+  { id: 'i6', code: 'TS-2024-WHITE-S', productName: '수피마 실켓 머슬 피트 티셔츠 (White)', location: '명동점', currentStock: 68, availableStock: 65, status: '시즌 신상품', category: '상의', brand: '브랜드 A' },
+  { id: 'i7', code: 'PT-2024-CHINO-M', productName: '테이퍼드 스트레치 코튼 치노 팬츠', location: '명동점', currentStock: 14, availableStock: 10, status: '예약 가능', category: '하의', brand: '브랜드 B' },
+];
+
+// 결재 요청 문서 목록 (Approval Discount Tickets)
+export const initialApprovalRequests: ApprovalRequest[] = [
+  {
+    id: 'a1',
+    reqCode: '2023 - 0852',
+    title: '여름 휴가철 특별 할인권',
+    usageStatus: '미사용',
+    requesterName: '홍길동',
+    requesterRole: '대리',
+    startDate: '2023.08.01',
+    endDate: '2023.08.31',
+    status: '결재대기'
+  },
+  {
+    id: 'a2',
+    reqCode: '2023 - 0848',
+    title: 'VIP 고객 전용 20% 할인',
+    usageStatus: '사용중',
+    requesterName: '김철수',
+    requesterRole: '과장',
+    startDate: '2023.07.15',
+    endDate: '2023.12.31',
+    status: '승인완료'
+  },
+  {
+    id: 'a3',
+    reqCode: '2023 - 0850',
+    title: '신규 매장 오픈 프로모션',
+    usageStatus: '미사용',
+    requesterName: '이영희',
+    requesterRole: '사원',
+    startDate: '2023.09.15',
+    endDate: '2023.10.15',
+    status: '결재대기'
+  },
+  {
+    id: 'a4',
+    reqCode: '2023 - 0856',
+    title: '동반 패밀리위크 사은 30%',
+    usageStatus: '미사용',
+    requesterName: '최민준',
+    requesterRole: '팀장',
+    startDate: '2023.11.01',
+    endDate: '2023.11.05',
+    status: '결재대기'
+  },
+];

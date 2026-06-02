@@ -1,0 +1,6 @@
+{
+  "name": "Mobile ERP Dashboard",
+  "description": "A high-performance modern responsive ERP Dashboard supporting real-time sales analysis, live stock tracing, barcode simulation, and digital Ticket Approvals.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
